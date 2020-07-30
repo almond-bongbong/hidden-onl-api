@@ -1,0 +1,38 @@
+{
+  "name": "hidden-onl-api",
+  "version": "1.0.0",
+  "description": "graphql API server for hidden onl",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "check": "gts check",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run check",
+    "dev": "nodemon --exec ts-node src/index.ts -e ts,graphql"
+  },
+  "author": "max",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "graphql-tools": "^6.0.15",
+    "graphql-yoga": "^1.18.3",
+    "merge-graphql-schemas": "^1.7.8",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@prisma/cli": "^2.3.0",
+    "@types/morgan": "^1.9.1",
+    "@types/node": "^13.11.1",
+    "@types/ws": "^7.2.6",
+    "eslint": "^7.5.0",
+    "gts": "^2.0.2",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.8.3"
+  }
+}
