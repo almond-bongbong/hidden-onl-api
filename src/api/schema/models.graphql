@@ -1,0 +1,20 @@
+type Response {
+  ok: Boolean!
+  message: String!
+  code: String
+}
+
+type File {
+  url: String!
+  originalName: String!
+  size: Int
+}
+
+type Influencer {
+  id: ID!
+  platform: Platform!
+  name: String
+  homepage: String
+  createdAt: String!
+  updatedAt: String
+}

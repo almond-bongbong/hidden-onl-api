@@ -1,0 +1,8 @@
+type Mutation {
+  registerInfluencer(
+    platform: Platform!
+    name: String!
+    homepage: String!
+    thumbnail: FileInput
+  ): Response
+}

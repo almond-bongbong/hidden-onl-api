@@ -1,0 +1,5 @@
+input FileInput {
+  url: String!
+  originalName: String!
+  size: Int
+}
