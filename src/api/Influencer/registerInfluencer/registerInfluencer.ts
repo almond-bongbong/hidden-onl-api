@@ -1,8 +1,14 @@
-import { MutationRegisterInfluencerArgs } from '../../../types/graphql';
+import {
+  MutationRegisterInfluencerArgs,
+  ResolversParentTypes,
+} from '../../../types/graphql';
 
 export default {
   Mutation: {
-    registerInfluencer: async (_, args: MutationRegisterInfluencerArgs): Promise<void> => {
+    registerInfluencer: async (
+      parent: ResolversParentTypes,
+      args: MutationRegisterInfluencerArgs
+    ): Promise<void> => {
       const { platform, name, homepage, thumbnail } = args;
       console.log('platform', platform);
       console.log('name', name);
