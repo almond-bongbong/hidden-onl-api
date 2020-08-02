@@ -11,6 +11,19 @@ export type Scalars = {
   Float: number;
 };
 
+export type Account = {
+  __typename?: 'Account';
+  id: Scalars['ID'];
+  role: Role;
+  email?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  platform: LoginPlatform;
+  platformId: Scalars['String'];
+  createdAt: Scalars['String'];
+  updatedAt?: Maybe<Scalars['String']>;
+  deletedAt?: Maybe<Scalars['String']>;
+};
+
 export type File = {
   __typename?: 'File';
   url: Scalars['String'];
@@ -33,12 +46,32 @@ export type Influencer = {
   thumbnail?: Maybe<File>;
   createdAt: Scalars['String'];
   updatedAt?: Maybe<Scalars['String']>;
+  deletedAt?: Maybe<Scalars['String']>;
+};
+
+export enum LoginPlatform {
+  Kakao = 'KAKAO'
+}
+
+export type LoginReponse = {
+  __typename?: 'LoginReponse';
+  ok: Scalars['Boolean'];
+  message: Scalars['String'];
+  code?: Maybe<Scalars['String']>;
+  token?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  registerInfluencer: Response;
-  updateInfluencer: Response;
+  login?: Maybe<LoginReponse>;
+  registerInfluencer: MutationResponse;
+  updateInfluencer: MutationResponse;
+};
+
+
+export type MutationLoginArgs = {
+  accessToken: Scalars['String'];
+  platform: LoginPlatform;
 };
 
 
@@ -57,6 +90,13 @@ export type MutationUpdateInfluencerArgs = {
   thumbnail?: Maybe<FileInput>;
 };
 
+export type MutationResponse = {
+  __typename?: 'MutationResponse';
+  ok: Scalars['Boolean'];
+  message: Scalars['String'];
+  code?: Maybe<Scalars['String']>;
+};
+
 export enum Platform {
   Youtube = 'YOUTUBE',
   Instagram = 'INSTAGRAM'
@@ -67,12 +107,10 @@ export type Query = {
   getInfluencers: Array<Influencer>;
 };
 
-export type Response = {
-  __typename?: 'Response';
-  ok: Scalars['Boolean'];
-  message: Scalars['String'];
-  code?: Maybe<Scalars['String']>;
-};
+export enum Role {
+  User = 'USER',
+  Manager = 'MANAGER'
+}
 
 
 
@@ -160,9 +198,13 @@ export type ResolversTypes = {
   File: ResolverTypeWrapper<File>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
-  FileInput: FileInput;
-  Response: ResolverTypeWrapper<Response>;
+  LoginPlatform: LoginPlatform;
+  LoginReponse: ResolverTypeWrapper<LoginReponse>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  FileInput: FileInput;
+  MutationResponse: ResolverTypeWrapper<MutationResponse>;
+  Role: Role;
+  Account: ResolverTypeWrapper<Account>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -174,9 +216,24 @@ export type ResolversParentTypes = {
   File: File;
   Int: Scalars['Int'];
   Mutation: {};
-  FileInput: FileInput;
-  Response: Response;
+  LoginReponse: LoginReponse;
   Boolean: Scalars['Boolean'];
+  FileInput: FileInput;
+  MutationResponse: MutationResponse;
+  Account: Account;
+};
+
+export type AccountResolvers<ContextType = any, ParentType extends ResolversParentTypes['Account'] = ResolversParentTypes['Account']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  role?: Resolver<ResolversTypes['Role'], ParentType, ContextType>;
+  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  platform?: Resolver<ResolversTypes['LoginPlatform'], ParentType, ContextType>;
+  platformId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
 export type FileResolvers<ContextType = any, ParentType extends ResolversParentTypes['File'] = ResolversParentTypes['File']> = {
@@ -194,31 +251,43 @@ export type InfluencerResolvers<ContextType = any, ParentType extends ResolversP
   thumbnail?: Resolver<Maybe<ResolversTypes['File']>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+};
+
+export type LoginReponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['LoginReponse'] = ResolversParentTypes['LoginReponse']> = {
+  ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  registerInfluencer?: Resolver<ResolversTypes['Response'], ParentType, ContextType, RequireFields<MutationRegisterInfluencerArgs, 'platform' | 'name' | 'homepage'>>;
-  updateInfluencer?: Resolver<ResolversTypes['Response'], ParentType, ContextType, RequireFields<MutationUpdateInfluencerArgs, 'id'>>;
+  login?: Resolver<Maybe<ResolversTypes['LoginReponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'accessToken' | 'platform'>>;
+  registerInfluencer?: Resolver<ResolversTypes['MutationResponse'], ParentType, ContextType, RequireFields<MutationRegisterInfluencerArgs, 'platform' | 'name' | 'homepage'>>;
+  updateInfluencer?: Resolver<ResolversTypes['MutationResponse'], ParentType, ContextType, RequireFields<MutationUpdateInfluencerArgs, 'id'>>;
 };
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  getInfluencers?: Resolver<Array<ResolversTypes['Influencer']>, ParentType, ContextType>;
-};
-
-export type ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['Response'] = ResolversParentTypes['Response']> = {
+export type MutationResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['MutationResponse'] = ResolversParentTypes['MutationResponse']> = {
   ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
+export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  getInfluencers?: Resolver<Array<ResolversTypes['Influencer']>, ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
+  Account?: AccountResolvers<ContextType>;
   File?: FileResolvers<ContextType>;
   Influencer?: InfluencerResolvers<ContextType>;
+  LoginReponse?: LoginReponseResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  MutationResponse?: MutationResponseResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  Response?: ResponseResolvers<ContextType>;
 };
 
 

@@ -1,16 +1,16 @@
 import {
   MutationUpdateInfluencerArgs,
   ResolversParentTypes,
-  Response,
-} from '../../../types/graphql';
-import { prisma } from '../../../index';
+  MutationResponse,
+} from 'types/graphql';
+import { prisma } from 'index';
 
 export default {
   Mutation: {
     updateInfluencer: async (
       parent: ResolversParentTypes,
       args: MutationUpdateInfluencerArgs
-    ): Promise<Response> => {
+    ): Promise<MutationResponse> => {
       const { id, name, homepage, thumbnail } = args;
 
       await prisma.influencer.update({

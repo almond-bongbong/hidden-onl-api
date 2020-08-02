@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "rootDir": ".",
+//    "rootDir": ".",
     "outDir": "build",
+    "baseUrl": "./src",
     "esModuleInterop": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

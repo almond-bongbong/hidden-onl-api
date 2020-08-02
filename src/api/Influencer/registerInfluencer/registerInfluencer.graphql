@@ -4,5 +4,5 @@ type Mutation {
     name: String!
     homepage: String!
     thumbnail: FileInput
-  ): Response!
+  ): MutationResponse!
 }

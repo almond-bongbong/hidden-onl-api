@@ -1,16 +1,16 @@
 import {
   MutationRegisterInfluencerArgs,
   ResolversParentTypes,
-  Response,
-} from '../../../types/graphql';
-import { prisma } from '../../../index';
+  MutationResponse,
+} from 'types/graphql';
+import { prisma } from 'index';
 
 export default {
   Mutation: {
     registerInfluencer: async (
       parent: ResolversParentTypes,
       args: MutationRegisterInfluencerArgs
-    ): Promise<Response> => {
+    ): Promise<MutationResponse> => {
       const { platform, name, homepage, thumbnail } = args;
 
       await prisma.influencer.create({

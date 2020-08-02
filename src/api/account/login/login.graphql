@@ -1,0 +1,13 @@
+type LoginReponse {
+  ok: Boolean!
+  message: String!
+  code: String
+  token: String
+}
+
+type Mutation {
+  login(
+    accessToken: String!
+    platform: LoginPlatform!
+  ): LoginReponse
+}

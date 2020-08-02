@@ -1,4 +1,4 @@
-type Response {
+type MutationResponse {
   ok: Boolean!
   message: String!
   code: String
@@ -10,6 +10,18 @@ type File {
   size: Int
 }
 
+type Account {
+  id: ID!
+  role: Role!
+  email: String
+  name: String!
+  platform: LoginPlatform!
+  platformId: String!
+  createdAt: String!
+  updatedAt: String
+  deletedAt: String
+}
+
 type Influencer {
   id: ID!
   platform: Platform!
@@ -18,4 +30,5 @@ type Influencer {
   thumbnail: File
   createdAt: String!
   updatedAt: String
+  deletedAt: String
 }
