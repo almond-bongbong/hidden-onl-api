@@ -15,6 +15,7 @@ type Influencer {
   platform: Platform!
   name: String
   homepage: String
+  thumbnail: File
   createdAt: String!
   updatedAt: String
 }

@@ -8,14 +8,9 @@
     "dev": "nodemon --exec ts-node src/index.ts -e ts,graphql",
     "premigrate": "npx prisma migrate save --name update --experimental",
     "migrate": "npx prisma migrate up --experimental",
-    "generate": "graphql-codegen --config codegen.yml",
-    "check": "gts check",
-    "clean": "gts clean",
-    "compile": "tsc",
-    "fix": "gts fix",
-    "prepare": "yarn run compile",
-    "pretest": "yarn run compile",
-    "posttest": "yarn run check"
+    "generate:prisma": "npx prisma generate",
+    "generate:type": "graphql-codegen --config codegen.yml",
+    "compile": "tsc"
   },
   "author": "max",
   "license": "ISC",

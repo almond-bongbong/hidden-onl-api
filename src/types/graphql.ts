@@ -30,13 +30,15 @@ export type Influencer = {
   platform: Platform;
   name?: Maybe<Scalars['String']>;
   homepage?: Maybe<Scalars['String']>;
+  thumbnail?: Maybe<File>;
   createdAt: Scalars['String'];
   updatedAt?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  registerInfluencer?: Maybe<Response>;
+  registerInfluencer: Response;
+  updateInfluencer: Response;
 };
 
 
@@ -44,6 +46,14 @@ export type MutationRegisterInfluencerArgs = {
   platform: Platform;
   name: Scalars['String'];
   homepage: Scalars['String'];
+  thumbnail?: Maybe<FileInput>;
+};
+
+
+export type MutationUpdateInfluencerArgs = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  homepage?: Maybe<Scalars['String']>;
   thumbnail?: Maybe<FileInput>;
 };
 
@@ -147,12 +157,12 @@ export type ResolversTypes = {
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Platform: Platform;
   String: ResolverTypeWrapper<Scalars['String']>;
+  File: ResolverTypeWrapper<File>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
   FileInput: FileInput;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
   Response: ResolverTypeWrapper<Response>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-  File: ResolverTypeWrapper<File>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -161,12 +171,12 @@ export type ResolversParentTypes = {
   Influencer: Influencer;
   ID: Scalars['ID'];
   String: Scalars['String'];
+  File: File;
+  Int: Scalars['Int'];
   Mutation: {};
   FileInput: FileInput;
-  Int: Scalars['Int'];
   Response: Response;
   Boolean: Scalars['Boolean'];
-  File: File;
 };
 
 export type FileResolvers<ContextType = any, ParentType extends ResolversParentTypes['File'] = ResolversParentTypes['File']> = {
@@ -181,13 +191,15 @@ export type InfluencerResolvers<ContextType = any, ParentType extends ResolversP
   platform?: Resolver<ResolversTypes['Platform'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   homepage?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  thumbnail?: Resolver<Maybe<ResolversTypes['File']>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  registerInfluencer?: Resolver<Maybe<ResolversTypes['Response']>, ParentType, ContextType, RequireFields<MutationRegisterInfluencerArgs, 'platform' | 'name' | 'homepage'>>;
+  registerInfluencer?: Resolver<ResolversTypes['Response'], ParentType, ContextType, RequireFields<MutationRegisterInfluencerArgs, 'platform' | 'name' | 'homepage'>>;
+  updateInfluencer?: Resolver<ResolversTypes['Response'], ParentType, ContextType, RequireFields<MutationUpdateInfluencerArgs, 'id'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {

@@ -1,0 +1,8 @@
+type Mutation {
+  updateInfluencer(
+    id: String!
+    name: String
+    homepage: String
+    thumbnail: FileInput
+  ): Response!
+}
