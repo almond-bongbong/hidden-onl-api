@@ -1,5 +1,8 @@
 {
   "extends": "./node_modules/gts/",
+  "rules": {
+    "node/no-extraneous-import": "off"
+  },
   "overrides": [
     {
       "files": ["src/api/**/*.ts"],

@@ -69,7 +69,7 @@ export default {
 
       return {
         ok: false,
-        message: '문제가 발생했습니다.',
+        message: '유효하지 않은 토큰입니다.',
       };
     },
   },

@@ -16,7 +16,6 @@ export const createJWT = (payload: Payload): string =>
 export const decodeJWT = async (token: string): Promise<Payload | null> => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET || '');
-    console.log('Decoded jwt : ', decoded);
     return decoded as Payload;
   } catch (e) {
     return null;
