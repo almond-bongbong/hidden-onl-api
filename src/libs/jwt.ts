@@ -10,7 +10,7 @@ export const createJWT = (payload: Payload): string =>
   jwt.sign(payload, process.env.JWT_SECRET || '', {
     algorithm: 'HS512',
     issuer: 'max.corp',
-    expiresIn: '1m',
+    expiresIn: '30d',
   });
 
 export const decodeJWT = async (token: string): Promise<Payload | null> => {

@@ -23,7 +23,7 @@ export default {
   Mutation: {
     login: async (
       parent: ResolversParentTypes,
-      args: MutationLoginArgs
+      args: MutationLoginArgs,
     ): Promise<LoginReponse> => {
       const { platform, accessToken } = args;
 

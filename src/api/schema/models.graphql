@@ -22,6 +22,15 @@ type Account {
   deletedAt: String
 }
 
+type CurrentAccount {
+  id: ID!
+  name: String!
+  role: Role!
+  iat: Int!
+  exp: Int!
+  iss: String!
+}
+
 type Influencer {
   id: ID!
   platform: Platform!

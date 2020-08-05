@@ -1,19 +1,17 @@
-import { CurrentAccount, ResolversParentTypes } from 'types/graphql';
+import { ResolversParentTypes } from 'types/graphql';
 import { Args } from '@prisma/client/runtime/query';
 import { Context } from 'types/type';
+import { prisma } from 'index';
 
 export default {
   Query: {
-    auth: async (
-      parent: ResolversParentTypes,
-      args: Args,
-      context: Context,
-    ): Promise<CurrentAccount> => {
+    me: (parent: ResolversParentTypes, args: Args, context: Context) => {
       const currentAccount = context.isAuthenticated();
-      console.log(context);
-      console.log('=====================');
-      console.log(currentAccount);
-      return currentAccount;
+      return prisma.account.findOne({
+        where: {
+          id: currentAccount.id,
+        },
+      });
     },
   },
 };

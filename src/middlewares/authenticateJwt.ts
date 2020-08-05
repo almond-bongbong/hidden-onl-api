@@ -1,11 +1,11 @@
 import decodeJWT from 'libs/jwt';
 import { NextFunction, Request, Response } from 'express';
-import { CurrentAccount } from 'types/common';
+import { CurrentAccount } from 'types/graphql';
 
 export default async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   const token = req.header('Authorization');
   if (token) {
