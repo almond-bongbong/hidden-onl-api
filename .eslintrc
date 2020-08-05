@@ -1,11 +1,10 @@
 {
-  "extends": "./node_modules/gts/",
   "rules": {
     "node/no-extraneous-import": "off"
   },
   "overrides": [
     {
-      "files": ["src/api/**/*.ts"],
+      "files": ["src/**/*.ts"],
       "rules": {
         "@typescript-eslint/explicit-module-boundary-types": "off"
       }
