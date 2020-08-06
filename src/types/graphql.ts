@@ -114,8 +114,9 @@ export enum Platform {
 
 export type Query = {
   __typename?: 'Query';
-  auth: CurrentAccount;
+  auth?: Maybe<CurrentAccount>;
   getInfluencers: Array<Influencer>;
+  me?: Maybe<Account>;
 };
 
 export enum Role {
@@ -210,13 +211,13 @@ export type ResolversTypes = {
   Influencer: ResolverTypeWrapper<Influencer>;
   Platform: Platform;
   File: ResolverTypeWrapper<File>;
-  Mutation: ResolverTypeWrapper<{}>;
+  Account: ResolverTypeWrapper<Account>;
   LoginPlatform: LoginPlatform;
+  Mutation: ResolverTypeWrapper<{}>;
   LoginReponse: ResolverTypeWrapper<LoginReponse>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   FileInput: FileInput;
   MutationResponse: ResolverTypeWrapper<MutationResponse>;
-  Account: ResolverTypeWrapper<Account>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -228,12 +229,12 @@ export type ResolversParentTypes = {
   Int: Scalars['Int'];
   Influencer: Influencer;
   File: File;
+  Account: Account;
   Mutation: {};
   LoginReponse: LoginReponse;
   Boolean: Scalars['Boolean'];
   FileInput: FileInput;
   MutationResponse: MutationResponse;
-  Account: Account;
 };
 
 export type AccountResolvers<ContextType = any, ParentType extends ResolversParentTypes['Account'] = ResolversParentTypes['Account']> = {
@@ -300,8 +301,9 @@ export type MutationResponseResolvers<ContextType = any, ParentType extends Reso
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  auth?: Resolver<ResolversTypes['CurrentAccount'], ParentType, ContextType>;
+  auth?: Resolver<Maybe<ResolversTypes['CurrentAccount']>, ParentType, ContextType>;
   getInfluencers?: Resolver<Array<ResolversTypes['Influencer']>, ParentType, ContextType>;
+  me?: Resolver<Maybe<ResolversTypes['Account']>, ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
