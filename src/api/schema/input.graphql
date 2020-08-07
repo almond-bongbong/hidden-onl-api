@@ -3,3 +3,11 @@ input FileInput {
   originalName: String!
   size: Int
 }
+
+input LocationInput {
+  longitude: Float!
+  latitude: Float!
+  zipcode: Int
+  address: String
+  addressDetail: String
+}

@@ -59,6 +59,14 @@ export type Influencer = {
   deletedAt?: Maybe<Scalars['String']>;
 };
 
+export type LocationInput = {
+  longitude: Scalars['Float'];
+  latitude: Scalars['Float'];
+  zipcode?: Maybe<Scalars['Int']>;
+  address?: Maybe<Scalars['String']>;
+  addressDetail?: Maybe<Scalars['String']>;
+};
+
 export enum LoginPlatform {
   Kakao = 'KAKAO'
 }
@@ -75,6 +83,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   login?: Maybe<LoginReponse>;
   registerInfluencer: MutationResponse;
+  registerPlace: MutationResponse;
   updateInfluencer: MutationResponse;
 };
 
@@ -90,6 +99,13 @@ export type MutationRegisterInfluencerArgs = {
   name: Scalars['String'];
   homepage: Scalars['String'];
   thumbnail?: Maybe<FileInput>;
+};
+
+
+export type MutationRegisterPlaceArgs = {
+  name: Scalars['String'];
+  location: LocationInput;
+  influencerId: Scalars['String'];
 };
 
 
@@ -218,6 +234,8 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   FileInput: FileInput;
   MutationResponse: ResolverTypeWrapper<MutationResponse>;
+  LocationInput: LocationInput;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -235,6 +253,8 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   FileInput: FileInput;
   MutationResponse: MutationResponse;
+  LocationInput: LocationInput;
+  Float: Scalars['Float'];
 };
 
 export type AccountResolvers<ContextType = any, ParentType extends ResolversParentTypes['Account'] = ResolversParentTypes['Account']> = {
@@ -290,6 +310,7 @@ export type LoginReponseResolvers<ContextType = any, ParentType extends Resolver
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   login?: Resolver<Maybe<ResolversTypes['LoginReponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'accessToken' | 'platform'>>;
   registerInfluencer?: Resolver<ResolversTypes['MutationResponse'], ParentType, ContextType, RequireFields<MutationRegisterInfluencerArgs, 'platform' | 'name' | 'homepage'>>;
+  registerPlace?: Resolver<ResolversTypes['MutationResponse'], ParentType, ContextType, RequireFields<MutationRegisterPlaceArgs, 'name' | 'location' | 'influencerId'>>;
   updateInfluencer?: Resolver<ResolversTypes['MutationResponse'], ParentType, ContextType, RequireFields<MutationUpdateInfluencerArgs, 'id'>>;
 };
 

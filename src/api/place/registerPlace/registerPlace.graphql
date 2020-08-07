@@ -1,0 +1,7 @@
+type Mutation {
+  registerPlace(
+    name: String!
+    location: LocationInput!
+    influencerId: String!
+  ): MutationResponse!
+}
