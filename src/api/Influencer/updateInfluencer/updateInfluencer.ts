@@ -6,6 +6,7 @@ import {
 } from 'types/graphql';
 import { prisma } from 'index';
 import { Context } from 'types/type';
+import { InfluencerResponse } from 'constants/response';
 
 export default {
   Mutation: {
@@ -38,7 +39,7 @@ export default {
 
       return {
         ok: true,
-        message: 'Success update influencer',
+        message: InfluencerResponse.UPDATE_SUCCESS.Message,
       };
     },
   },

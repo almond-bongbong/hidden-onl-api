@@ -1,6 +1,7 @@
 import { MutationRegisterPlaceArgs, MutationResponse, ResolversParentTypes } from 'types/graphql';
 import { prisma } from 'index';
 import { Context } from 'types/type';
+import { PlaceResponse } from 'constants/response';
 
 export default {
   Mutation: {
@@ -32,7 +33,7 @@ export default {
       });
       return {
         ok: true,
-        message: 'Success create place',
+        message: PlaceResponse.CREATE_SUCCESS.Message,
       };
     },
   },
