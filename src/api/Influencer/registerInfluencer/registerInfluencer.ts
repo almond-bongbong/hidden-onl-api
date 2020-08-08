@@ -2,21 +2,20 @@ import {
   MutationRegisterInfluencerArgs,
   MutationResponse,
   ResolversParentTypes,
+  Role,
 } from 'types/graphql';
 import { prisma } from 'index';
+import { Context } from 'types/type';
 
 export default {
   Mutation: {
     registerInfluencer: async (
       parent: ResolversParentTypes,
       args: MutationRegisterInfluencerArgs,
+      { isAuthorized }: Context,
     ): Promise<MutationResponse> => {
-      const {
-        platform,
-        name,
-        homepage,
-        thumbnail,
-      } = args;
+      isAuthorized(Role.Admin);
+      const { platform, name, homepage, thumbnail } = args;
 
       await prisma.influencer.create({
         data: {
@@ -25,12 +24,12 @@ export default {
           homepage,
           thumbnail: thumbnail
             ? {
-              create: {
-                url: thumbnail.url,
-                originalName: thumbnail.originalName,
-                size: thumbnail.size,
-              },
-            }
+                create: {
+                  url: thumbnail.url,
+                  originalName: thumbnail.originalName,
+                  size: thumbnail.size,
+                },
+              }
             : undefined,
         },
       });

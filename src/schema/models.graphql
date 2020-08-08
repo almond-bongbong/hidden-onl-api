@@ -16,7 +16,7 @@ type Account {
   email: String
   name: String!
   platform: LoginPlatform!
-  platformId: String!
+  thumbnail: File
   createdAt: String!
   updatedAt: String
   deletedAt: String
@@ -39,5 +39,17 @@ type Influencer {
   thumbnail: File
   createdAt: String!
   updatedAt: String
-  deletedAt: String
+}
+
+type Place {
+  id: ID!
+  name: String!
+  latitude: Float!
+  longitude: Float!
+  zipcode: Int
+  address: String
+  addressDetail: String
+  influencer: Influencer!
+  createdAt: String!
+  updatedAt: String
 }

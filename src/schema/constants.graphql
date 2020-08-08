@@ -1,6 +1,7 @@
 enum Role {
   USER
   MANAGER
+  ADMIN
 }
 
 enum LoginPlatform {
@@ -10,4 +11,5 @@ enum LoginPlatform {
 enum Platform {
   YOUTUBE
   INSTAGRAM
+  TV
 }

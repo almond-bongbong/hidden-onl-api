@@ -5,9 +5,14 @@ input FileInput {
 }
 
 input LocationInput {
-  longitude: Float!
   latitude: Float!
+  longitude: Float!
   zipcode: Int
   address: String
   addressDetail: String
+}
+
+input LatLngInput {
+  latitude: Float!
+  longitude: Float!
 }

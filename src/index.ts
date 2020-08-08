@@ -3,8 +3,9 @@ import { GraphQLServer } from 'graphql-yoga';
 import { PrismaClient } from '@prisma/client';
 import logger from 'morgan';
 import authenticateJwt from 'middlewares/authenticateJwt';
-import authenticateFilter from 'middlewares/authenticateFilter';
+import { authenticationFilter, authorityFilter } from 'middlewares/authFilter';
 import schema from './schema';
+import { Role } from 'types/graphql';
 
 dotenv.config();
 const PORT = process.env.PORT || 4000;
@@ -17,7 +18,8 @@ const server = new GraphQLServer({
   schema,
   context: ({ request }) => ({
     request,
-    isAuthenticated: () => authenticateFilter(request),
+    isAuthenticated: () => authenticationFilter(request),
+    isAuthorized: (role: Role) => authorityFilter(request, role),
   }),
 });
 

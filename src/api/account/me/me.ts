@@ -8,6 +8,9 @@ export default {
     me: (parent: ResolversParentTypes, args: Args, context: Context) => {
       const currentAccount = context.isAuthenticated();
       return prisma.account.findOne({
+        include: {
+          thumbnail: true,
+        },
         where: {
           id: currentAccount.id,
         },

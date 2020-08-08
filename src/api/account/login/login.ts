@@ -7,6 +7,8 @@ import {
 import * as kakaoApi from 'external/kakao';
 import { prisma } from 'index';
 import { createJWT } from 'libs/jwt';
+import { AccountResponse } from 'constants/response';
+import { createSentence } from 'libs/nicknameGenerator';
 
 const findAccount = async (platform: LoginPlatform, platformId: string) => {
   const accounts = await prisma.account.findMany({
@@ -21,10 +23,7 @@ const findAccount = async (platform: LoginPlatform, platformId: string) => {
 
 export default {
   Mutation: {
-    login: async (
-      parent: ResolversParentTypes,
-      args: MutationLoginArgs,
-    ): Promise<LoginReponse> => {
+    login: async (parent: ResolversParentTypes, args: MutationLoginArgs): Promise<LoginReponse> => {
       const { platform, accessToken } = args;
 
       try {
@@ -40,7 +39,7 @@ export default {
                 platform,
                 platformId: kakaoId,
                 email: kakaoAccount.email,
-                name: kakaoAccount.profile?.nickname,
+                name: kakaoAccount.profile?.nickname || createSentence(),
                 thumbnail: kakaoAccount.profile?.thumbnail_image_url && {
                   create: {
                     url: kakaoAccount.profile?.thumbnail_image_url,
@@ -59,7 +58,7 @@ export default {
 
           return {
             ok: true,
-            message: 'Login success',
+            message: AccountResponse.LOGIN_SUCCESS.Message,
             token,
           };
         }
@@ -69,7 +68,8 @@ export default {
 
       return {
         ok: false,
-        message: '유효하지 않은 토큰입니다.',
+        code: AccountResponse.INVALID_SOCIAL_TOKEN.Code,
+        message: AccountResponse.INVALID_SOCIAL_TOKEN.Message,
       };
     },
   },

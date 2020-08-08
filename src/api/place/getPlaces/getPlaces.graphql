@@ -1,0 +1,3 @@
+type Query {
+  getPlaces(leftBottom: LatLngInput!, rightTop: LatLngInput!): [Place]!
+}
