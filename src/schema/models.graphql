@@ -34,7 +34,7 @@ type CurrentAccount {
 type Influencer {
   id: ID!
   platform: Platform!
-  name: String
+  name: String!
   homepage: String
   thumbnail: File
   createdAt: String!
