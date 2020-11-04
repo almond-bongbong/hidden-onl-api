@@ -6,6 +6,7 @@ import authenticateJwt from 'middlewares/authenticateJwt';
 import { authenticationFilter, authorityFilter } from 'middlewares/authFilter';
 import schema from './schema';
 import { Role } from 'types/graphql';
+import { formatError } from 'apollo-errors';
 
 dotenv.config();
 const PORT = process.env.PORT || 4000;
@@ -25,6 +26,6 @@ const server = new GraphQLServer({
 
 server.express.use(logger('dev'));
 server.express.use(authenticateJwt);
-server.start({ port: PORT }, () => {
+server.start({ port: PORT, formatError }, () => {
   console.log(`Server running on port ${PORT}`);
 });

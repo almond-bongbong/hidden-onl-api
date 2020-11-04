@@ -1,9 +1,10 @@
 import { Request } from 'express';
 import { CurrentAccount, Role } from 'types/graphql';
+import { UnAuthenticatedError } from '../constants/error';
 
 export const authenticationFilter = (request: Request): CurrentAccount => {
   if (!request.currentAccount) {
-    throw Error('You need to log in to perform this action');
+    throw new UnAuthenticatedError();
   } else {
     return request.currentAccount;
   }
