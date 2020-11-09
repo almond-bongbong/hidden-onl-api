@@ -13,3 +13,7 @@ enum Platform {
   INSTAGRAM
   TV
 }
+
+enum ErrorName {
+  UNAUTHENTICATED
+}

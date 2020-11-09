@@ -3,5 +3,6 @@ type Mutation {
     name: String!
     location: LocationInput!
     influencerId: String!
+    link: String!
   ): MutationResponse!
 }
