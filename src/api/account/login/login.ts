@@ -1,6 +1,6 @@
 import {
   LoginPlatform,
-  LoginReponse,
+  LoginResponse,
   MutationLoginArgs,
   ResolversParentTypes,
 } from 'types/graphql';
@@ -23,7 +23,10 @@ const findAccount = async (platform: LoginPlatform, platformId: string) => {
 
 export default {
   Mutation: {
-    login: async (parent: ResolversParentTypes, args: MutationLoginArgs): Promise<LoginReponse> => {
+    login: async (
+      parent: ResolversParentTypes,
+      args: MutationLoginArgs,
+    ): Promise<LoginResponse> => {
       const { platform, accessToken } = args;
 
       try {
@@ -32,6 +35,8 @@ export default {
           const kakaoId = data.id.toString();
           const kakaoAccount = data.kakao_account;
           let account = await findAccount(platform, kakaoId);
+
+          console.log(data);
 
           if (!account) {
             account = await prisma.account.create({

@@ -79,8 +79,8 @@ export enum LoginPlatform {
   Kakao = 'KAKAO'
 }
 
-export type LoginReponse = {
-  __typename?: 'LoginReponse';
+export type LoginResponse = {
+  __typename?: 'LoginResponse';
   ok: Scalars['Boolean'];
   message: Scalars['String'];
   code?: Maybe<Scalars['String']>;
@@ -89,7 +89,7 @@ export type LoginReponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  login?: Maybe<LoginReponse>;
+  login?: Maybe<LoginResponse>;
   registerInfluencer: MutationResponse;
   registerPlace: MutationResponse;
   updateInfluencer: MutationResponse;
@@ -272,7 +272,7 @@ export type ResolversTypes = {
   Account: ResolverTypeWrapper<Account>;
   LoginPlatform: LoginPlatform;
   Mutation: ResolverTypeWrapper<{}>;
-  LoginReponse: ResolverTypeWrapper<LoginReponse>;
+  LoginResponse: ResolverTypeWrapper<LoginResponse>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   FileInput: FileInput;
   MutationResponse: ResolverTypeWrapper<MutationResponse>;
@@ -294,7 +294,7 @@ export type ResolversParentTypes = {
   Place: Place;
   Account: Account;
   Mutation: {};
-  LoginReponse: LoginReponse;
+  LoginResponse: LoginResponse;
   Boolean: Scalars['Boolean'];
   FileInput: FileInput;
   MutationResponse: MutationResponse;
@@ -342,7 +342,7 @@ export type InfluencerResolvers<ContextType = any, ParentType extends ResolversP
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type LoginReponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['LoginReponse'] = ResolversParentTypes['LoginReponse']> = {
+export type LoginResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['LoginResponse'] = ResolversParentTypes['LoginResponse']> = {
   ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -351,7 +351,7 @@ export type LoginReponseResolvers<ContextType = any, ParentType extends Resolver
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  login?: Resolver<Maybe<ResolversTypes['LoginReponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'accessToken' | 'platform'>>;
+  login?: Resolver<Maybe<ResolversTypes['LoginResponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'accessToken' | 'platform'>>;
   registerInfluencer?: Resolver<ResolversTypes['MutationResponse'], ParentType, ContextType, RequireFields<MutationRegisterInfluencerArgs, 'platform' | 'name' | 'homepage'>>;
   registerPlace?: Resolver<ResolversTypes['MutationResponse'], ParentType, ContextType, RequireFields<MutationRegisterPlaceArgs, 'name' | 'location' | 'influencerId' | 'link'>>;
   updateInfluencer?: Resolver<ResolversTypes['MutationResponse'], ParentType, ContextType, RequireFields<MutationUpdateInfluencerArgs, 'id'>>;
@@ -391,7 +391,7 @@ export type Resolvers<ContextType = any> = {
   CurrentAccount?: CurrentAccountResolvers<ContextType>;
   File?: FileResolvers<ContextType>;
   Influencer?: InfluencerResolvers<ContextType>;
-  LoginReponse?: LoginReponseResolvers<ContextType>;
+  LoginResponse?: LoginResponseResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   MutationResponse?: MutationResponseResolvers<ContextType>;
   Place?: PlaceResolvers<ContextType>;

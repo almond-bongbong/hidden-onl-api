@@ -1,4 +1,4 @@
-type LoginReponse {
+type LoginResponse {
   ok: Boolean!
   message: String!
   code: String
@@ -9,5 +9,5 @@ type Mutation {
   login(
     accessToken: String!
     platform: LoginPlatform!
-  ): LoginReponse
+  ): LoginResponse
 }
